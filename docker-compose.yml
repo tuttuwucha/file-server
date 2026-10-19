@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  web-file-server:
+    build: .
+    container_name: home-file-server
+    ports:
+      - "8080:80"
+    volumes:
+      # Папка 'my_files_storage' создастся автоматически рядом с docker-compose.yml
+      - ./my_files_storage:/storage
+    restart: unless-stopped
+
