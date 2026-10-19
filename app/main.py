@@ -59,9 +59,16 @@ async def list_files(
     else:
         file_list.sort(key=lambda x: x["time_raw"], reverse=reverse_sort)
 
-    return templates.TemplateResponse("index.html", {
-        "request": request, "files": file_list, "search": search or "", "sort_by": sort_by, "order": order
-    })
+    return templates.TemplateResponse(
+		"index.html",
+		context={
+			"request": request,
+			"files": file_list,
+			"search": search or "",
+			"sort_by": sort_by,
+			"order": order
+		}
+	)
 
 @app.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
