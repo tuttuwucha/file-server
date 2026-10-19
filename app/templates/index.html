@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой Домашний Файлообменник</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; line-height: 1.6; }
+        .upload-section { background: #f4f4f4; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        ul { list-style: none; padding: 0; }
+        li { padding: 10px; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; }
+        a { color: #0066cc; text-decoration: none; }
+        button { background: #28a745; color: white; border: 0; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>🏠 Домашний Файловый Сервер</h1>
+
+    <div class="upload-section">
+        <h3>Загрузить новый файл:</h3>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+
+    <h3>Доступные файлы:</h3>
+    <ul>
+        {% for file in files %}
+        <li>
+            <span>{{ file }}</span>
+            <a href="/download/{{ file }}" download>⬇️ Скачать</a>
+        </li>
+        {% else %}
+        <li>Папка пуста</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
