@@ -10,7 +10,10 @@ app = FastAPI()
 STORAGE_DIR = "/storage"
 os.makedirs(STORAGE_DIR, exist_ok=True)
 
-templates = Jinja2Templates(directory="app/templates")
+# Получаем абсолютный путь к папке, где лежит текущий файл main.py
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+templates = Jinja2Templates(directory=os.path.join(CURRENT_DIR, "templates"))
+
 
 def get_file_info(filename):
     file_path = os.path.join(STORAGE_DIR, filename)
